@@ -102,14 +102,21 @@ def short_url(short_url):
         click_counter = long_url.get('click_counter')
 
         if long_url.get('email'):
+            print(long_url)
             click_counter += 1
             referrers = long_url.get('referrer_url')
             referrer = request.headers.get('Referer')
             countries = long_url.get('country')
             ip_addr = request.remote_addr
-            country = DbIpCity.get(ip_addr, api_key='free').country
-            countries.append(country)
-            referrers.append(referrer)
+
+            if ip_addr:
+                country = DbIpCity.get(ip_addr, api_key='free').country
+
+            if country:
+                countries.append(country)
+
+            if referrer:
+                referrers.append(referrer)
 
             db.find_and_modify('url', query={'_id': long_url['_id']},
                                click_counter=click_counter,
@@ -153,8 +160,7 @@ def analyze(id):
                                    referrer_urls_analyze=referrer_urls_analyze,
                                    countries_analyze=countries_analyze,
                                    total_ref_url=total_ref_url,
-                                   total_country_url=total_country_url,)
+                                   total_country_url=total_country_url, )
 
     else:
         return redirect('home')
-
