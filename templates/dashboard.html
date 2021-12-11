@@ -7,22 +7,62 @@
         <p>Welcome {{ session['email'] }}</p>
         <table class="table">
             <thead class="table-dark">
-              <tr>
+            <tr>
                 <th scope="col">Short URL</th>
                 <th scope="col">Click Number</th>
                 <th scope="col">Long URL</th>
-              </tr>
+                <th>Referrer Url</th>
+                <th>Country</th>
+                <th scope="col">#</th>
+            </tr>
             </thead>
             <tbody>
-                {% for url in urls %}
-                    <tr>
-                        <td> <a href="">https://diminuendo.ml/{{ url.short_url}}</a></td>
-                        <td>{{ url.click_counter}}</td>
-                        <td>{{ url.long_url }}</td>
-
-                    </tr>
-                {% endfor %}
+            {% for url in urls %}
+                <tr>
+                    <td><a href="">https://diminuendo.ml/{{ url.short_url }}</a></td>
+                    <td>{{ url.click_counter }}</td>
+                    <td>{{ url.long_url }}</td>
+                    <td>{{ url.referrer_url | length }}</td>
+                    <td>{{ url.country | length }}</td>
+                    <td><a class="btn btn-danger" href="/analyze/{{ url._id }}">Analyze</a></td>
+                </tr>
+            {% endfor %}
             </tbody>
-          </table>
+        </table>
+
+        <br><br>
+
+        {% if referrer_urls_analyze and countries_analyze %}
+            <strong>Analyze Result of Referrer Url:</strong>
+            <br>
+
+            {% for url, counter in referrer_urls_analyze.items() %}
+                {{ url }} | {{ counter }}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated"
+                         role="progressbar"
+                         style="width: {{ counter }}%"
+                         aria-valuenow="{{ counter / 100 }}"
+                         aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
+            {% endfor %}
+
+            <hr>
+
+            <strong>Analyze Result of Referrer Country:</strong>
+            <br>
+            {% for country, counter in countries_analyze.items() %}
+                {{ country }} | {{ counter }}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated"
+                         role="progressbar"
+                         style="width: {{ counter }}%"
+                         aria-valuenow="{{ counter / 100 }}"
+                         aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
+            {% endfor %}
+        {% endif %}
     {% endif %}
 {% endblock %}

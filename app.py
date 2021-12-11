@@ -1,11 +1,13 @@
 import time
-from ip2geotools.databases.noncommercial import DbIpCity
 
+from bson.objectid import ObjectId
+from ip2geotools.databases.noncommercial import DbIpCity
 from flask import Flask, render_template, session, request, redirect
 from heybooster.helpers.database.mongodb import MongoDBHelper
 from configs import URI, NAME, SECRET_KEY
 from utils.generator_and_saver import generate_short_url, save_url
 from utils.json_encoder import JsonEncoder
+from utils.analyze_referrer_url import referrer_urls_analyzer, countries_analyzer
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -123,6 +125,28 @@ def dashboard():
             urls = list(db.find('url', query={"email": session.get("email")}))
 
             return render_template('dashboard.html', urls=urls)
+    else:
+        return redirect('home')
+
+
+@app.route('/analyze/<id>', methods=['GET'])
+def analyze(id):
+    if session.get("logged_in"):
+        with MongoDBHelper(uri=URI, database=NAME) as db:
+            urls = list(db.find('url', query={"email": session.get("email")}))
+            url = db.find_one('url', query={'_id': ObjectId(id)})
+            referrer_urls = url['referrer_url']
+            countries = url['country']
+
+            referrer_urls_analyze = referrer_urls_analyzer(referrer_urls)
+            countries_analyze = countries_analyzer(countries)
+
+            return render_template('dashboard.html',
+                                   urls=urls,
+                                   url=url,
+                                   referrer_urls_analyze=referrer_urls_analyze,
+                                   countries_analyze=countries_analyze)
+
     else:
         return redirect('home')
 
