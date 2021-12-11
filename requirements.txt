@@ -15,3 +15,5 @@ requests==2.26.0
 short-url==1.2.2
 urllib3==1.26.7
 Werkzeug==2.0.2
+python-dotenv~=0.19.2
+ip2geotools~=0.1.6
