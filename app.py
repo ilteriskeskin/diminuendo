@@ -140,13 +140,20 @@ def analyze(id):
             countries = url['country']
 
             referrer_urls_analyze = referrer_urls_analyzer(referrer_urls)
+            # sum total referrer url counting
+            total_ref_url = sum(referrer_urls_analyze.values())
+
             countries_analyze = countries_analyzer(countries)
+            # sum total country url counting
+            total_country_url = sum(countries_analyze.values())
 
             return render_template('dashboard.html',
                                    urls=urls,
                                    url=url,
                                    referrer_urls_analyze=referrer_urls_analyze,
-                                   countries_analyze=countries_analyze)
+                                   countries_analyze=countries_analyze,
+                                   total_ref_url=total_ref_url,
+                                   total_country_url=total_country_url,)
 
     else:
         return redirect('home')

@@ -35,14 +35,16 @@
         {% if referrer_urls_analyze and countries_analyze %}
             <strong>Analyze Result of Referrer Url:</strong>
             <br>
+            <strong>Referred Url Numbers: {{ total_ref_url }}</strong>
+            <br>
 
             {% for url, counter in referrer_urls_analyze.items() %}
-                {{ url }} | {{ counter }}
+                {{ url }} | {{ counter }} | {{ counter * 100 / total_ref_url  }} %
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated"
                          role="progressbar"
-                         style="width: {{ counter }}%"
-                         aria-valuenow="{{ counter / 100 }}"
+                         style="width: {{ counter * 100 / total_ref_url }}%"
+                         aria-valuenow="{{ counter }}"
                          aria-valuemin="0"
                          aria-valuemax="100"></div>
                 </div>
@@ -52,13 +54,15 @@
 
             <strong>Analyze Result of Referrer Country:</strong>
             <br>
+            <strong>Country Numbers: {{ total_country_url }}</strong>
+            <br>
             {% for country, counter in countries_analyze.items() %}
-                {{ country }} | {{ counter }}
+                {{ country }} | {{ counter }} | {{ counter * 100 / total_country_url  }} %
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated"
                          role="progressbar"
-                         style="width: {{ counter }}%"
-                         aria-valuenow="{{ counter / 100 }}"
+                         style="width: {{ counter * 100 / total_country_url }}%"
+                         aria-valuenow="{{ counter }}"
                          aria-valuemin="0"
                          aria-valuemax="100"></div>
                 </div>
