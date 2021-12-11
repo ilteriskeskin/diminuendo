@@ -19,7 +19,9 @@
             <tbody>
             {% for url in urls %}
                 <tr>
-                    <td><a href="">https://diminuendo.ml/u/{{ url.short_url }}</a></td>
+                    <td>
+                        <a href="https://diminuendo.ml/u/{{ url.short_url }}">https://diminuendo.ml/u/{{ url.short_url }}</a>
+                    </td>
                     <td>{{ url.click_counter }}</td>
                     <td>{{ url.long_url }}</td>
                     <td>{{ url.referrer_url | length }}</td>
@@ -39,7 +41,7 @@
             <br>
 
             {% for url, counter in referrer_urls_analyze.items() %}
-                {{ url }} | {{ counter }} | {{ counter * 100 / total_ref_url  }} %
+                {{ url }} | {{ counter }} | {{ counter * 100 / total_ref_url }} %
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated"
                          role="progressbar"
@@ -57,7 +59,7 @@
             <strong>Country Numbers: {{ total_country_url }}</strong>
             <br>
             {% for country, counter in countries_analyze.items() %}
-                {{ country }} | {{ counter }} | {{ counter * 100 / total_country_url  }} %
+                {{ country }} | {{ counter }} | {{ counter * 100 / total_country_url }} %
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated"
                          role="progressbar"
