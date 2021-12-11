@@ -95,7 +95,7 @@ def logout():
     return redirect('login')
 
 
-@app.route('/u/<short_url>', methods=['GET'])
+@app.route('/u/<short_url>/', methods=['GET'])
 def short_url(short_url):
     with MongoDBHelper(uri=URI, database=NAME) as db:
         long_url = db.find_one('url', query={'short_url': short_url})
