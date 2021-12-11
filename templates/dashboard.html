@@ -3,7 +3,26 @@
 {% block content %}
     <h1>Home</h1>
     <hr>
-    {% if session["logged_in"] == True %}
+    {% if session["logged_in"] %}
         <p>Welcome {{ session['email'] }}</p>
+        <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Short URL</th>
+                <th scope="col">Click Number</th>
+                <th scope="col">Long URL</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for url in urls %}
+                    <tr>
+                        <td> <a href="">https://diminuendo.ml/{{ url.short_url}}</a></td>
+                        <td>{{ url.click_counter}}</td>
+                        <td>{{ url.long_url }}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
     {% endif %}
 {% endblock %}

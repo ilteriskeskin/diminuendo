@@ -12,6 +12,9 @@
         <ul class="navbar-nav ml-auto">
             {% if session["logged_in"] == True %}
                 <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
             {% else %}
