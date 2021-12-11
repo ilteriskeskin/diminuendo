@@ -1,13 +1,15 @@
 import time
 
 from bson.objectid import ObjectId
-from ip2geotools.databases.noncommercial import DbIpCity
-from flask import Flask, render_template, session, request, redirect
+from flask import Flask, redirect, render_template, request, session
 from heybooster.helpers.database.mongodb import MongoDBHelper
-from configs import URI, NAME, SECRET_KEY
+from ip2geotools.databases.noncommercial import DbIpCity
+
+from configs import NAME, SECRET_KEY, URI
+from utils.analyze_referrer_url import (countries_analyzer,
+                                        referrer_urls_analyzer)
 from utils.generator_and_saver import generate_short_url, save_url
 from utils.json_encoder import JsonEncoder
-from utils.analyze_referrer_url import referrer_urls_analyzer, countries_analyzer
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
