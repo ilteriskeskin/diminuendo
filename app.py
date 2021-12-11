@@ -102,7 +102,6 @@ def short_url(short_url):
         click_counter = long_url.get('click_counter')
 
         if long_url.get('email'):
-            print(long_url)
             click_counter += 1
             referrers = long_url.get('referrer_url')
             referrer = request.headers.get('Referer')
@@ -111,9 +110,8 @@ def short_url(short_url):
 
             if ip_addr:
                 country = DbIpCity.get(ip_addr, api_key='free').country
-
-            if country:
-                countries.append(country)
+                if country:
+                    countries.append(country)
 
             if referrer:
                 referrers.append(referrer)
