@@ -108,5 +108,16 @@ def short_url(short_url):
     return render_template('home.html', long_url=long_url)
 
 
+@app.route('/dashboard/', methods=['GET'])
+def dashboard():
+    if session.get("logged_in"):
+        with MongoDBHelper(uri=URI, database=NAME) as db:
+            urls = list(db.find('url', query={"email": session.get("email")}))
+
+            return render_template('dashboard.html', urls=urls)
+    else:
+        return redirect('home')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
