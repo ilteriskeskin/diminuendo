@@ -130,3 +130,6 @@ dmypy.json
 
 # IDE or Editor
 .idea
+
+# Github
+.github
