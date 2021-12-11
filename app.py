@@ -50,7 +50,7 @@ def home():
 
 @app.route('/about')
 def about():
-    return 'about'
+    return render_template('about.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -95,7 +95,7 @@ def logout():
     return redirect('login')
 
 
-@app.route('/<short_url>/', methods=['GET'])
+@app.route('/u/<short_url>/', methods=['GET'])
 def short_url(short_url):
     with MongoDBHelper(uri=URI, database=NAME) as db:
         long_url = db.find_one('url', query={'short_url': short_url})
@@ -157,3 +157,4 @@ def analyze(id):
 
     else:
         return redirect('home')
+

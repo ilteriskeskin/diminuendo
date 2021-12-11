@@ -16,8 +16,11 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
+    <br>
+
     {% if short_url %}
-        <p>Your short url is: <a href="https://diminuendo.ml/{{ short_url }}">https://diminuendo.ml/{{ short_url }}</a></p>
+        <p>Your short url is: <a
+                href="https://diminuendo.ml/u/{{ short_url }}">https://diminuendo.ml/{{ short_url }}</a></p>
     {% endif %}
 
     {% if long_url %}
