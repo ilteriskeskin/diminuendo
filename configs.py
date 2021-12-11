@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 URI = os.environ.get('DB_URI')
 NAME = os.environ.get('DB_NAME')

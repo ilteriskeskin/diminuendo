@@ -23,6 +23,7 @@ def home():
                 _id = db.insert_one('url', data={'email': session['email'],
                                                  'long_url': long_url,
                                                  'click_counter': 0,
+                                                 'referrer_url': [],
                                                  'ts': unix_timestamp}).inserted_id
 
                 short_url = generate_short_url(int(unix_timestamp))
@@ -95,8 +96,13 @@ def short_url(short_url):
         click_counter = long_url.get('click_counter')
 
         if long_url.get('email'):
+            referrers = long_url.get('referrer_url')
+            referrer = request.headers.get("Referer")
+            referrers.append(referrer)
             click_counter += 1
-            db.find_and_modify('url', query={'_id': long_url['_id']}, click_counter=click_counter)
+            db.find_and_modify('url', query={'_id': long_url['_id']},
+                               click_counter=click_counter,
+                               referrer_url=referrers)
 
     # return redirect(long_url['long_url'])
     return render_template('home.html', long_url=long_url)
