@@ -1,4 +1,5 @@
 import time
+from ip2geotools.databases.noncommercial import DbIpCity
 
 from flask import Flask, render_template, session, request, redirect
 from heybooster.helpers.database.mongodb import MongoDBHelper
@@ -24,6 +25,7 @@ def home():
                                                  'long_url': long_url,
                                                  'click_counter': 0,
                                                  'referrer_url': [],
+                                                 'country': [],
                                                  'ts': unix_timestamp}).inserted_id
 
                 short_url = generate_short_url(int(unix_timestamp))
@@ -96,13 +98,19 @@ def short_url(short_url):
         click_counter = long_url.get('click_counter')
 
         if long_url.get('email'):
-            referrers = long_url.get('referrer_url')
-            referrer = request.headers.get("Referer")
-            referrers.append(referrer)
             click_counter += 1
+            referrers = long_url.get('referrer_url')
+            referrer = request.headers.get('Referer')
+            countries = long_url.get('country')
+            ip_addr = request.remote_addr
+            country = DbIpCity.get(ip_addr, api_key='free').country
+            countries.append(country)
+            referrers.append(referrer)
+
             db.find_and_modify('url', query={'_id': long_url['_id']},
                                click_counter=click_counter,
-                               referrer_url=referrers)
+                               referrer_url=referrers,
+                               country=countries)
 
     # return redirect(long_url['long_url'])
     return render_template('home.html', long_url=long_url)
