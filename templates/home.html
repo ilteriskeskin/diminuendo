@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Home</h1>
+    <hr>
+    {% if session["logged_in"] == True %}
+        <p>Welcome {{ session['email'] }}</p>
+    {% endif %}
+    <br><br>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label for="long_url_field" class="form-label">Long Url</label>
+            <input type="url" class="form-control" name="long_url" aria-describedby="url_helper">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% if short_url %}
+        <p>Your short url is: <a href="http://localhost:5000/{{ short_url }}">http://localhost/{{ short_url }}</a></p>
+    {% endif %}
+
+    {% if long_url %}
+        {{ long_url }}
+    {% endif %}
+{% endblock %}

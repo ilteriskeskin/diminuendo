@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: aqua">
+    <a class="navbar-brand" href="/">Diminuendo</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if session["logged_in"] == True %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

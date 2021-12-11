@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Home</h1>
+    <hr>
+    {% if session["logged_in"] == True %}
+        <p>Welcome {{ session['email'] }}</p>
+    {% endif %}
+{% endblock %}
