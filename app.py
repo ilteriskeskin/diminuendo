@@ -114,8 +114,7 @@ def short_url(short_url):
                                referrer_url=referrers,
                                country=countries)
 
-    # return redirect(long_url['long_url'])
-    return render_template('home.html', long_url=long_url)
+    return redirect(long_url['long_url'])
 
 
 @app.route('/dashboard/', methods=['GET'])
