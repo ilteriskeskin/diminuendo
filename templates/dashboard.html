@@ -33,8 +33,16 @@
         </table>
 
         <br><br>
+        {% with messages = get_flashed_messages() %}  
+            {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+                 
+            {% endif %}  
+        {% endwith %} 
 
-        {% if referrer_urls_analyze and countries_analyze %}
+        {% if referrer_urls_analyze %}
             <strong>Analyze Result of Referrer Url:</strong>
             <br>
             <strong>Referred Url Numbers: {{ total_ref_url }}</strong>
@@ -51,9 +59,9 @@
                          aria-valuemax="100"></div>
                 </div>
             {% endfor %}
-
+            {% endif %}
             <hr>
-
+            {% if countries_analyze %}
             <strong>Analyze Result of Referrer Country:</strong>
             <br>
             <strong>Country Numbers: {{ total_country_url }}</strong>

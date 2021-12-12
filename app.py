@@ -1,7 +1,7 @@
 import time
 
 from bson.objectid import ObjectId
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, flash, url_for
 from heybooster.helpers.database.mongodb import MongoDBHelper
 from ip2geotools.databases.noncommercial import DbIpCity
 
@@ -143,6 +143,12 @@ def analyze(id):
             url = db.find_one('url', query={'_id': ObjectId(id)})
             referrer_urls = url['referrer_url']
             countries = url['country']
+            if not referrer_urls:
+                flash("There is not enough referrer url data to analyze this url!")
+            if not countries:
+                flash("There is not enough country data to analyze this url!")
+            if not referrer_urls and not countries:
+                return redirect(url_for('dashboard'))
 
             referrer_urls_analyze = referrer_urls_analyzer(referrer_urls)
             # sum total referrer url counting
