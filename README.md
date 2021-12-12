@@ -39,8 +39,9 @@ Enter localhost:5000 on web browser
 
 **Screenshots**
 
-![ss1](https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss1.png)
+<img src="https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss1.png" alt="ss1" width="750" height="400">
 
-![ss2](https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss2.png)
 
-![ss3](https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss3.png)
+<img src="https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss2.png" alt="ss2" width="750" height="400">
+
+<img src="https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss3.png" alt="ss3" width="750" height="400">
