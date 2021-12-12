@@ -5,11 +5,15 @@
 
 [Harry Potter Magic List](https://tr.wikipedia.org/wiki/Harry_Potter%27daki_b%C3%BCy%C3%BCler_listesi)
 
-Diminuendo is url shortener and analyzer service
+**En**
 
-![OMG!](https://static.wikia.nocookie.net/harrypotter/images/8/8c/Diminuendo_1.gif/revision/latest?cb=20130807021732)
+Diminuendo is url shortener and analyzer service. This project will shorten your urls and allows you to follow the shortened url. (How many times, from what source, from what country?)
 
-[audio video](https://getyarn.io/yarn-clip/e064dbb5-9650-4488-b13a-eb8e0a289fbb)
+**Tr**
+
+Diminuendo url kısaltma ve analiz servisidir. Bu proje ile urllerinizi kısaltabilir ve kısalltığınız urlin takibini yapabilirsiniz. (Kaç kere, hangi kaynaktan, hangi ülkeden)
+
+[Diminuendo audio video](https://getyarn.io/yarn-clip/e064dbb5-9650-4488-b13a-eb8e0a289fbb)
 
 ---
 
@@ -35,8 +39,8 @@ Enter localhost:5000 on web browser
 
 **Screenshots**
 
-![ss1](screenshots/ss1.png)
+![ss1](https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss1.png)
 
-![ss2](screenshots/ss2.png)
+![ss2](https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss2.png)
 
-![ss3](screenshots/ss3.png)
+![ss3](https://github.com/ilteriskeskin/diminuendo/blob/main/screenshots/ss3.png)
