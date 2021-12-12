@@ -17,8 +17,8 @@ Diminuendo url kısaltma ve analiz servisidir. Bu proje ile urllerinizi kısalta
 
 ---
 
-**Preview Link**
-[diminuendo](https://diminuendo.ml/)
+**Demo Link**
+[https://diminuendo.ml/](https://diminuendo.ml/)
 
 ---
 
