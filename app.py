@@ -1,7 +1,9 @@
 import time
 
 from bson.objectid import ObjectId
-from flask import Flask, redirect, render_template, request, session, flash, url_for
+from flask import (Flask, flash, redirect, render_template, request, session,
+                   url_for)
+from flask_bcrypt import Bcrypt
 from heybooster.helpers.database.mongodb import MongoDBHelper
 from ip2geotools.databases.noncommercial import DbIpCity
 
@@ -14,6 +16,7 @@ from utils.json_encoder import JsonEncoder
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
 app.json_encoder = JsonEncoder
+bcrypt = Bcrypt(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -60,9 +63,9 @@ def login():
         password = request.form['password']
 
         with MongoDBHelper(uri=URI, database=NAME) as db:
-            user = db.find_one('user', query={'email': email, 'password': password})
+            user = db.find_one('user', query={'email': email})
 
-        if user:
+        if user and bcrypt.check_password_hash(user["password"], password):
             session['email'] = email
             session['logged_in'] = True
 
@@ -76,9 +79,10 @@ def register():
     if request.method == "POST":
         email = request.form['email']
         password = request.form['password']
+        hashed_pwd = bcrypt.generate_password_hash(password).decode('utf-8')
         data = {
             'email': email,
-            'password': password
+            'password': hashed_pwd
         }
 
         with MongoDBHelper(uri=URI, database=NAME) as db:
